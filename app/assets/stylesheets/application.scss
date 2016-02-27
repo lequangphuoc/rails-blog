@@ -1,0 +1,29 @@
+// Custom bootstrap variables must be set or import before bootstrap itself.
+@import "bootstrap";
+
+body {
+    padding-top: 70px;
+}
+
+.navbar{
+ 	margin-bottom: 20px;
+}
+
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comment{
+    font-size: 15px;
+}
+
+.comment .comment-body {
+    overflow: hidden;
+}
+
+.comment .avatar {
+    float: left;
+    margin: 0 20px 20px 0;
+}
+

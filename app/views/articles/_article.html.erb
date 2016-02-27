@@ -1,0 +1,15 @@
+
+<div class="card">
+  <div class="card-block">
+    <h4 class="card-title"><%= link_to article.title, article %></h4>
+    <small class="text-muted"><%= article.count %> Total views</small>,&nbsp;<small class="text-muted"><%= article.comments.count %> Comments</small>
+    
+    <p class="card-text"><%= @markdown.render(article.body).html_safe %></p>
+  </div>
+  <div class="card-footer text-xs-right">
+  	<%= link_to 'Read More &#xBB;'.html_safe, article, class: 'btn btn-primary' %>
+    <%= link_to 'Edit', edit_article_path(article), class: 'btn btn-warning' %>
+    <%= link_to 'Delete', article, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+  </div>
+</div>
+  

@@ -1,0 +1,20 @@
+<% unless comment.commenter.nil? %>	
+<li class="comment">
+	<img src="http://0.gravatar.com/avatar/0484039122defe0ba14be08fb9d10d72?s=50&amp;d=mm&amp;r=g" class="avatar" height="50" width="50">
+	<div class="comment-body">
+		<span class="author">
+		  <strong><%= comment.commenter %></strong>
+		</span>
+		 
+		<p class="message">
+		  <%= comment.body %>
+		</p>
+
+		<p class="action">
+		  <%= link_to 'Destroy Comment', [comment.article, comment],
+		               method: :delete,
+		               data: { confirm: 'Are you sure?' } %>
+		</p>
+	</div>
+</li>
+<% end %>

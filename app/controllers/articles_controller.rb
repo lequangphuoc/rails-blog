@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_markdown, only: [:index, :show] 
 
   # GET /articles
   # GET /articles.json
@@ -9,18 +10,13 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.all.order("created_at DESC")
     end
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @article = Article.find(params[:id])
-    @article.count ||= 0
-    @article.count += 1
-    @article.save
-
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    @article.increment!(:count)
+    @comment = @article.comments.build
   end
 
   # GET /articles/new
@@ -65,7 +61,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    if @article.title == "About me"
+    if @article.id == 1
       respond_to do |format|
         format.html { redirect_to articles_url, notice: 'Sorry! You cannot destroy me.' }
         format.json { head :no_content }
@@ -85,6 +81,10 @@ class ArticlesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
+    end
+
+    def set_markdown
+      @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
